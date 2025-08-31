@@ -1,4 +1,7 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+from typing import Optional
+
 
 app = FastAPI()
 
@@ -20,3 +23,13 @@ def blog_post(id: int):    # not necessary to specify the type here
 @app.get("/blog/{id}/comments/{comment_id}")
 def blog_comments(id: int, comment_id: int):
     return {"message": f"Welcome to the comments section of blog post {id}, comment {comment_id}"}
+
+
+class Blog(BaseModel):
+    title: str
+    content: str
+    published: Optional[bool]
+
+@app.post("/blog")
+def create_blog_post(post: Blog):
+    return {"message": "Blog post created", "post": post}
