@@ -33,3 +33,6 @@ class Blog(BaseModel):
 @app.post("/blog")
 def create_blog_post(post: Blog):
     return {"message": "Blog post created", "post": post}
+
+
+# this is the basics of fastapi, that how to write a simple api with get and post request!!
